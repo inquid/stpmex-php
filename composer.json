@@ -1,0 +1,20 @@
+{
+    "name": "kinedu/stpmex-php",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Orlando Charles",
+            "email": "orlando@kinedu.com",
+            "homepage": "https://orlandocharles.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kinedu\\STP\\": "src"
+        }
+    }
+}
