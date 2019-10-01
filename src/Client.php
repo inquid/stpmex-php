@@ -3,7 +3,10 @@
 namespace Kinedu\STP;
 
 use Kinedu\STP\Request\HttpClient;
-use Kinedu\STP\Service\AccountService;
+use Kinedu\STP\Service\{
+    AccountService,
+    CatalogueService
+};
 
 class Client
 {
@@ -22,6 +25,7 @@ class Client
     /** @var array */
     protected $services = [
         'account' => AccountService::class,
+        'catalogue' => CatalogueService::class,
     ];
 
     /**
