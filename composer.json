@@ -1,6 +1,12 @@
 {
     "name": "kinedu/stpmex-php",
+    "homepage": "https://github.com/Kinedu/stpmex-php",
     "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "kinedu",
+        "stp"
+    ],
     "authors": [
         {
             "name": "Orlando Charles",
@@ -16,5 +22,7 @@
         "psr-4": {
             "Kinedu\\STP\\": "src"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
