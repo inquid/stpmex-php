@@ -2,7 +2,7 @@
 
 namespace Kinedu\STP\Service;
 
-class CatalogueService extends STPService
+class CatalogueService extends SoapSTPService
 {
     public function get()
     {

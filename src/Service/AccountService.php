@@ -2,7 +2,7 @@
 
 namespace Kinedu\STP\Service;
 
-class AccountService extends STPService
+class AccountService extends SoapSTPService
 {
     public function balance()
     {

@@ -2,10 +2,14 @@
 
 namespace Kinedu\STP;
 
-use Kinedu\STP\Request\HttpClient;
+use Kinedu\STP\Request\{
+    RestHttpClient,
+    SoapHttpClient
+};
 use Kinedu\STP\Service\{
     AccountService,
-    CatalogueService
+    CatalogueService,
+    OrderService
 };
 
 class Client
@@ -26,6 +30,12 @@ class Client
     protected $services = [
         'account' => AccountService::class,
         'catalogue' => CatalogueService::class,
+        'order' => OrderService::class,
+    ];
+
+    /** @var array */
+    protected $restServices = [
+        'order',
     ];
 
     /**
@@ -46,10 +56,10 @@ class Client
         $this->live = $live;
     }
 
-    public function getSignature(): string
+    public function getSignature(string $data = null): string
     {
         $pkey = $this->getCertificate();
-        openssl_sign($this->accountKey, $signature, $pkey, OPENSSL_ALGO_SHA256);
+        openssl_sign($data ?? $this->accountKey, $signature, $pkey, OPENSSL_ALGO_SHA256);
         openssl_free_key($pkey);
         return base64_encode($signature);
     }
@@ -57,6 +67,13 @@ class Client
     public function getCertificate()
     {
         return openssl_get_privatekey($this->key, $this->passphrase);
+    }
+
+    protected function httpClient(string $service)
+    {
+        return (in_array($service, $this->restServices))
+            ? new RestHttpClient($this)
+            : new SoapHttpClient($this);
     }
 
     /**
@@ -70,7 +87,7 @@ class Client
     public function __call(string $method, array $params)
     {
         if (array_key_exists($method, $services = $this->services)) {
-            return new $services[$method](new HttpClient($this));
+            return new $services[$method]($this->httpClient($method));
         }
     }
 }

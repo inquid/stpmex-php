@@ -2,9 +2,9 @@
 
 namespace Kinedu\STP\Service;
 
-use Kinedu\STP\Request\HttpClient;
+use Kinedu\STP\Request\SoapHttpClient;
 
-class STPService
+class SoapSTPService
 {
     /** @var \Kinedu\STP\Request\HttpClient */
     protected $http;
@@ -12,11 +12,11 @@ class STPService
     /**
      * Create a stp service instance.
      *
-     * @param  \Kinedu\STP\Request\HttpClient  $http
+     * @param  \Kinedu\STP\Request\SoapHttpClient  $http
      *
      * @return void
      */
-    public function __construct(HttpClient $http)
+    public function __construct(SoapHttpClient $http)
     {
         $this->http = $http;
     }
