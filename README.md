@@ -17,11 +17,6 @@ composer require kinedu/stpmex-php
 
 ### Client
 
-- [Client](#client)
-- [Account Service](#account-service)
-- [Catalogue Service](#catalogue-service)
-- [Order Service](#order-service)
-
 Example:
 
 ```php
