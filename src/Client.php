@@ -15,13 +15,13 @@ use Kinedu\STP\Service\{
 class Client
 {
     /** @var string */
+    public $accountKey;
+
+    /** @var string */
     protected $key;
 
     /** @var string */
     protected $passphrase;
-
-    /** @var string */
-    public $accountKey;
 
     /** @var bool */
     public $live;
@@ -41,18 +41,18 @@ class Client
     /**
      * Create a client instance.
      *
+     * @param  string  $accountKey
      * @param  string  $key
      * @param  string  $passphrase
-     * @param  string  $accountKey
      * @param  bool  $live
      *
      * @return void
      */
-    public function __construct(string $key, string $accountKey, string $passphrase, bool $live = false)
+    public function __construct(string $accountKey, string $key, string $passphrase, bool $live = false)
     {
+        $this->accountKey = $accountKey;
         $this->key = $key;
         $this->passphrase = $passphrase;
-        $this->accountKey = $accountKey;
         $this->live = $live;
     }
 

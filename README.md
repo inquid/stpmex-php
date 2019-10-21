@@ -13,6 +13,93 @@
 composer require kinedu/stpmex-php
 ```
 
+## Use
+
+### Client
+
+- [Client](#client)
+- [Account Service](#account-service)
+- [Catalogue Service](#catalogue-service)
+- [Order Service](#order-service)
+
+Example:
+
+```php
+<?php
+
+use Kinedu\STP\Client;
+
+$account = '646180123400000001';
+$key = file_get_contents('key.pem');
+$passphrase = '12345678';
+$live = false;
+
+$client = new Client($account, $key, $passphrase $live);
+```
+
+### Account Service
+
+Example:
+
+```php
+<?php
+
+use Kinedu\STP\Client;
+
+$client = new Client(...);
+
+$client->account()->balance();
+```
+
+### Catalogue Service
+
+Example:
+
+```php
+<?php
+
+use Kinedu\STP\Client;
+
+$client = new Client(...);
+
+$client->catalogue()->get();
+```
+
+### Order Service
+
+Example:
+
+```php
+<?php
+
+use Kinedu\STP\Client;
+use Kinedu\STP\Catalogue\{
+    AccountTypeCatalogue,
+    FinancialInstitutionCatalogue
+}
+
+$client = new Client(...);
+
+$client->order()->create([
+    'claveRastreo' => '123456789000000000000000003',
+    'conceptoPago' => 'Kinedu Payment',
+    'emailBeneficiario' => 'john.doe@example.com',
+    'cuentaBeneficiario' => '012345678987654321',
+    'empresa' => 'KINEDU',
+    'institucionContraparte' => FinancialInstitutionCatalogue::BANORTE_IXE,
+    'institucionOperante' => FinancialInstitutionCatalogue::STP,
+    'iva' => 16.00,
+    'monto' => 1200.00,
+    'nombreBeneficiario' => 'John Doe',
+    'nombreOrdenante' => 'Kinedu SAPI de CV',
+    'prioridad' => 1,
+    'referenciaNumerica' => '1234567',
+    'tipoCuentaBeneficiario' => AccountTypeCatalogue::CLABE,
+    'tipoPago' => PaymentTypeCatalogue::THIRD_PARTIES,
+    'medioEntrega' => 3,
+]);
+```
+
 ## License
 
 The STP Mexico PHP library is open-sourced software licensed under the [MIT license](LICENSE).
