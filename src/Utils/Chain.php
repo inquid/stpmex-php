@@ -6,7 +6,7 @@ class Chain
 {
     public static function generate(array $data): string
     {
-        $order = [
+        $orderKeys = [
             'institucionContraparte',
             'empresa',
             'fechaOperacion',
@@ -45,9 +45,14 @@ class Chain
 
         $originalString = '||';
 
-        foreach ($data as $key => $value) {
-            $value = ltrim($value);
-            $value = rtrim($value);
+        foreach ($orderKeys as $key) {
+            $value = '';
+
+            if (isset($data[$key])) {
+                $value = $data[$key];
+                $value = ltrim($value);
+                $value = rtrim($value);
+            }
 
             $originalString .= "{$value}|";
         }

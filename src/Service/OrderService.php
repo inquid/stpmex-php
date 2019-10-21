@@ -12,11 +12,9 @@ class OrderService extends RestSTPService
             Chain::generate($data)
         );
 
-        $request = $http->makeRequest('put', 'ordenPago/registra', [
-            'json' => array_merge([
-                'firma' => $signature
-            ], $data),
-        ]);
+        $request = $http->makeRequest('put', 'ordenPago/registra', array_merge($data, [
+            'firma' => $signature,
+        ]));
 
         return json_decode($request->getBody())->resultado;
     }
