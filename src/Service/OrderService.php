@@ -2,8 +2,8 @@
 
 namespace Kinedu\STP\Service;
 
-use Exception;
 use Kinedu\STP\Utils\Chain;
+use Kinedu\STP\Exceptions\STPException;
 
 class OrderService extends RestSTPService
 {
@@ -19,8 +19,8 @@ class OrderService extends RestSTPService
 
         $result = json_decode($request->getBody())->resultado;
 
-        if ($error = $result->descripcionError) {
-            throw new Exception($error);
+        if (isset($result->descripcionError)) {
+            throw new STPException($result->descripcionError, $result->id);
         }
 
         return $result->id;
