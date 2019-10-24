@@ -13,7 +13,7 @@
 composer require kinedu/stpmex-php
 ```
 
-## Use
+## Usage
 
 ### Client
 
@@ -29,7 +29,7 @@ $key = file_get_contents('key.pem');
 $passphrase = '12345678';
 $live = false;
 
-$client = new Client($account, $key, $passphrase $live);
+$client = new Client($account, $key, $passphrase, $live);
 ```
 
 ### Account Service
@@ -71,7 +71,7 @@ use Kinedu\STP\Client;
 use Kinedu\STP\Catalogue\{
     AccountTypeCatalogue,
     FinancialInstitutionCatalogue
-}
+};
 
 $client = new Client(...);
 
